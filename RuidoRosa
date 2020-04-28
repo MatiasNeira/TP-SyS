@@ -4,7 +4,6 @@ M = (Fi:Ff);
 L = length(M);
 c = [zeros(1,L)];
 
-r =  randn(1,L) ;
 b = [zeros(1,L)];
 for i= 1:L
     
