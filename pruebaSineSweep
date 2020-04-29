@@ -1,0 +1,17 @@
+tf=20;
+w0=20;
+wf=2000;
+Fs=44100;
+m= Fs*tf
+t = linspace(0,tf,m);
+
+subplot(2,1,1);
+y=sineSweep(tf,w0,wf,Fs);
+plot(y)
+
+subplot(2,1,2);
+b=inverseFilter(tf,wf,w0,t).*y;
+plot(b)
+
+sound(y,Fs);
+audiowrite('sinesweep.wav',y,Fs);
