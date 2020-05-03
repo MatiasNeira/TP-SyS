@@ -9,7 +9,7 @@ nT60=round(log(1000)/1-max(abs(roots(A))));
 v=randn(1,Nx+nT60);
 x=filter(B,A,v);
 Xt=x(nT60+1:end);
-plot(Xt)
+plot(Xt);title('Ruido Rosa');ylabel('Amplitud');xlabel('frecuencia')
 sound(Xt,Fs)	
 audiowrite('ruidoRosa.wav',Xt,Fs);
 end

@@ -15,5 +15,5 @@ Bt=inverseFilter(tf,wf,w0,t).*Xt;
 plot(t,Bt);title('Inverse Filter');ylabel('Amplitud');xlabel('Tiempo')
 
 
-%sound(y,Fs);
-%audiowrite('sinesweep.wav',y,Fs);
+sound(y,Fs);
+audiowrite('sinesweep.wav',y,Fs);
