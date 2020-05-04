@@ -11,7 +11,7 @@ plot(t,Xt);title('Sine-Sweep');ylabel('Amplitud');xlabel('Tiempo')
 
 
 subplot(2,1,2);
-Bt=inverseFilter(tf,wf,w0,t).*Xt;
+Bt=dunctionMt(tf,wf,w0,t).*Xt;
 plot(t,Bt);title('Inverse Filter');ylabel('Amplitud');xlabel('Tiempo')
 
 

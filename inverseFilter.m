@@ -1,6 +1,5 @@
-function iF = inverseFilter(tf,w0,w1,n)
-%UNTITLED Summary of this function goes here
+function Mt = functionMt(tf,w0,wf,t)
+%UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
-iF=(w0/2*pi*((tf*w0)/log(w1/w0))/((tf/log(w1/w0))))*exp(n/(tf/log(w1/w0)));
+    Mt=(w0/2*pi*((tf*w0)/log(wf/w0))/((tf/log(wf/w0))))*exp(t/(tf/log(wf/w0)))
 end
-
