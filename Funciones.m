@@ -11,9 +11,8 @@ plot(t,Xt);title('Sine-Sweep');ylabel('Amplitud');xlabel('Tiempo')
 
 
 subplot(2,1,2);
-Bt=functionMt(tf,wf,w0,t).*Xt;
+Bt=inverseFilter(tf,wf,w0,t);
 plot(t,Bt);title('Inverse Filter');ylabel('Amplitud');xlabel('Tiempo')
-
 
 sound(y,Fs);
 audiowrite('sinesweep.wav',y,Fs);
@@ -66,10 +65,17 @@ Xt = sin(k*(exp(t/L)-1));
 end
 
     
-    %%Modulacion
+%%Modulacion
     
 function Mt = functionMt(tf,w0,wf,t)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
     Mt=(w0/2*pi*((tf*w0)/log(wf/w0))/((tf/log(wf/w0))))*exp(t/(tf/log(wf/w0)))
+end
+
+%%FiltroInverso
+function iF = inverseFilter(tf,w0,wf,t)
+%UNTITLED Summary of this function goes here
+%   Detailed explanation goes here
+iF = functionMt(tf,w0,wf,t).*sineSweep(tf,w0,wf);
 end
