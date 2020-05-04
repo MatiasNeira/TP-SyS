@@ -1,3 +1,4 @@
+%%RuidoRosa
 function Xt= ruidorosa(t)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
@@ -30,7 +31,7 @@ function Xt= ruidorosa(t)
     
 end
         
-%%
+%%SineSweep
         
 function Xt = sineSweep(tf,w0,wf)
 %UNTITLED Summary of this function goes here
@@ -45,7 +46,7 @@ Xt = sin(k*(exp(t/L)-1));
 end
 
     
-    %%
+    %%Modulacion
     
 function Mt = functionMt(tf,w0,wf,t)
 %UNTITLED4 Summary of this function goes here
