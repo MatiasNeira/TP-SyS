@@ -29,3 +29,26 @@ function Xt= ruidorosa(t)
     sound(a,Fs) %Reproduce el archivo de audio de la grabacion (a)
     
 end
+        
+%%
+        
+function Xt = sineSweep(tf,w0,wf)
+%UNTITLED Summary of this function goes here
+%   Detailed explanation goes here
+Fs=44100
+m= Fs*tf
+t = linspace(0,tf,m);
+k=(tf*w0)/log(wf/w0);
+L=tf/log(wf/w0);
+
+Xt = sin(k*(exp(t/L)-1));
+end
+
+    
+    %%
+    
+function Mt = functionMt(tf,w0,wf,t)
+%UNTITLED4 Summary of this function goes here
+%   Detailed explanation goes here
+    Mt=(w0/2*pi*((tf*w0)/log(wf/w0))/((tf/log(wf/w0))))*exp(t/(tf/log(wf/w0)))
+end
