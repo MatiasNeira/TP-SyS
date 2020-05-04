@@ -11,11 +11,11 @@ plot(t,Xt);title('Sine-Sweep');ylabel('Amplitud');xlabel('Tiempo')
 
 
 subplot(2,1,2);
-Bt=inverseFilter(tf,wf,w0,t);
-plot(t,Bt);title('Inverse Filter');ylabel('Amplitud');xlabel('Tiempo')
+Yt=inverseFilter(tf,wf,w0,t);
+plot(t,Yt);title('Inverse Filter');ylabel('Amplitud');xlabel('Tiempo')
 
-sound(y,Fs);
-audiowrite('sinesweep.wav',y,Fs);
+sound(Yt,Fs);
+audiowrite('sinesweep.wav',Yt,Fs);
 
 %%RuidoRosa
 function Xt= ruidorosa(t)
