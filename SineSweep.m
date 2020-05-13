@@ -8,4 +8,6 @@ k=(tf*w0)/log(wf/w0);
 L=tf/log(wf/w0);
 
 Xt = sin(k*(exp(t/L)-1));
+plot(t,Xt);title('Sine-Sweep');ylabel('Amplitud');xlabel('Tiempo');
+sound(Xt,Fs);
 end
