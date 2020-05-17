@@ -1,15 +1,15 @@
-function Xt= Ruidorosa(t)
+function xT= ruidorosa(T)
     Fs=44100;
-    Nx=Fs*t; %Cantidad de muestras a sintetizar
-    B=[0.049922035 -0.095993537 0.050612699 -0.004408786]; %Coeficientes de el filtro de 3db de caida
+    Nx=Fs*T; %Cantidad de muestras a sintetizar
+    B=[0.049922035 -0.095993537 0.050612699 -0.004408786]; %Coeficientes de el filtro de 3db de caida.
     A=[1 -2.494956002 2.017265875 -0.522189400];
-    nT60=round(log(1000)/1-max(abs(roots(A)))); %Calcula la cantidad de muestras que ocupa el TR.
+    nT60=round(log(1000)/1-max(abs(roots(A)))); %Calcula la cantidad de muestras correspondientes al TR.
     v=randn(1,Nx+nT60);
     x=filter(B,A,v);
-    Xt=x(nT60+1:end);
-    plot(Xt);title('Ruido Rosa');ylabel('Amplitud');xlabel('frecuencia')
-    sound(Xt,Fs);
-    audiowrite('ruidoRosa.wav',Xt,Fs);
+    xT=x(nT60+1:end);
+    plot(xT);title('Ruido Rosa');ylabel('Amplitud');xlabel('frecuencia')
+    sound(xT,Fs);
+    audiowrite('ruidoRosa.wav',xT,Fs);
     
     %% Grabacion y Reproduccion del ruido rosa
     
@@ -19,7 +19,7 @@ function Xt= Ruidorosa(t)
     recorder = audiorecorder(Fs,bits,canales,input); %informacion y forma en la que graba
     
     disp('-----grabando-----')
-    recordblocking(recorder,t); % Graba por un tiempo t
+    recordblocking(recorder,T); % Graba por un tiempo t
     disp('-----fin de la grabacion-----')
     
     a=getaudiodata(recorder); %Guarda el audio (en forma matricial) en la variable a
