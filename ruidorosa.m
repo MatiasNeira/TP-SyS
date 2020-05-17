@@ -19,7 +19,7 @@ function xT= ruidorosa(T)
     recorder = audiorecorder(Fs,bits,canales,input); %informacion y forma en la que graba
     
     disp('-----grabando-----')
-    recordblocking(recorder,T); % Graba por un tiempo t
+    recordblocking(recorder,T); % Graba por un tiempo T
     disp('-----fin de la grabacion-----')
     
     a=getaudiodata(recorder); %Guarda el audio (en forma matricial) en la variable a
