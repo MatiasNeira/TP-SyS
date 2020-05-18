@@ -1,4 +1,5 @@
-function Xt = sinesweep(T,w0,wf,t)
+function Xt = sinesweep(T,w0,wf)
+
     Fs=44100;
     m = Fs*T;
     t = linspace(0,T,m);
