@@ -4,7 +4,7 @@ m=Fs*T;
 t=linspace(0,T,m);
 D = flip(SineSweep(T,w0,wf));
 
-iF = modulacion(T,wf,w0,t).*D;
+iF = modulacion(T,w0,wf,t).*D;
 
 
 plot(t,iF);title('Inverse Filter');ylabel('Amplitud');xlabel('Tiempo');
