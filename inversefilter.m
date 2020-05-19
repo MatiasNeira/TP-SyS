@@ -1,4 +1,5 @@
 function iF = inversefilter(T,w0,wf)
+
 Fs=44100;
 m=Fs*T;
 t=linspace(0,T,m);
