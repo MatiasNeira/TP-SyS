@@ -1,4 +1,4 @@
-function SintRI = y(T,Fs,bandas)
+function y = SintRI(T,Fs,bandas)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 if bandas == 'oct'
