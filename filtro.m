@@ -26,7 +26,7 @@ function fil = filtro(bandas)
           f_inf = fc(i)/2^(1/2);
           f_sup = fc(i)*2^(1/2);
        
-            fil{i,1} = designfilt('bandpassiir','FilterOrder',8,'HalfPowerFrequency1',f_in,'HalfPowerFrequency2',f_sup,'SampleRate',Fs);  
+            fil{i,1} = designfilt('bandpassiir','FilterOrder',8,'HalfPowerFrequency1',f_inf,'HalfPowerFrequency2',f_sup,'SampleRate',Fs);  
      end
      
      fvtool(fil{4,1})
