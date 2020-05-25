@@ -3,7 +3,7 @@ w0 = 20; %Frecuencia inicial
 wf = 2000; %frecuencia Final
 Fs = 44100; %frecuencia de muestreo
 m = Fs*tf; %cantidad de muestras
-t = linspace(0,tf,m);
+t = linspace(0,T,m);
 
 subplot(3,1,1);
 
