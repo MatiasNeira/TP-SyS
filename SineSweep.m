@@ -1,11 +1,14 @@
-function Xt = SineSweep(T)
-%Xt = SineSweep :: Funcion con argumento T [segundos] de entrada.
+function Xt = SineSweep(T,F0,Ff)
+%Xt = SineSweep :: Funcion con argumento de entrada.
+% Argumentos : T [segundos] tiempo de duracion.
+%              F0 [Hz] frecuencia inicial.
+%              Ff [Hz] frecuencia final.
 %La funcion realiza un Sinesweep de tiempo T asignado como entrada
 %procesando los datos : w0,wf,Fs [Hz] y t (array). Dando la salida Xt.
 % ..nota:: t es un array con "m" puntos entre 0 y T.
     
-    w0 = 20;
-    wf = 22000;
+    w0 = 2*pi*F0;
+    wf = 2*pi*Ff;
     Fs=44100;
     m = Fs*T;
     t = linspace(0,T,m);
