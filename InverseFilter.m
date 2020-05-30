@@ -1,16 +1,16 @@
-function iF = InverseFilter(T)
+function iF = InverseFilter(T,F0,Ff)
 %iF = InverseFilter :: Funcion con argumento de entrada.
-%Argumento T :: tiempo [segundos]
+% Argumentos : T [segundos] tiempo de duracion.
+%              F0 [Hz] frecuencia inicial.
+%              Ff [Hz] frecuencia final.
 %La funcion realiza un Filtro Inverso de tiempo T (arg)
 %Devolviendo como salida iF (Array) y un plot del mismo (Amplitud vs. tiempo).
     
-w0 = 20;
-wf = 22000;
 Fs=44100;
 m=Fs*T;
 t=linspace(0,T,m);
 
-D = flip(SineSweep(T));
+D = flip(SineSweep(T,F0,Ff));
 
 iF = Modulacion(T).*D;
 
