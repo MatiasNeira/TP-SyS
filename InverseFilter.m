@@ -1,4 +1,4 @@
-function iF = InverseFilter(T,FO,Ff)
+function iF = InverseFilter(T,F0,Ff)
 
 %                      ...
 %                      
