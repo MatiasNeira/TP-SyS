@@ -1,10 +1,10 @@
-function Xt = SineSweep(T,Fi,Ff)
+function Xt = SineSweep(T,F0,Ff)
 
 %                   ...
 %
 % Xt=SineSweep :: Funcion con argumentos de entrada
 % Argumentos : T [segundos] tiempo de duracion
-%              Fi [Hz] frecuencia inicial
+%              F0 [Hz] frecuencia inicial
 %              Ff [Hz] frecuencia final
 % La funcion realiza un sine-sweep de tiempo T asignado,
 % procesando los datos: w0, wf, Fs [Hz] y t. La salida es Xt.
@@ -13,7 +13,7 @@ function Xt = SineSweep(T,Fi,Ff)
 %                   ...
 
     
-    w0 = 2*pi*Fi;
+    w0 = 2*pi*F0;
     wf = 2*pi*Ff;
     Fs=44100;
     m = Fs*T;
