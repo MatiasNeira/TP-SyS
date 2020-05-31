@@ -6,7 +6,7 @@ function GR = Play_Rec()
  % .InverseFilter :: arg(T) [segundos]-- (Reproduce y graba el InverseFilter) --
  % .RuidoRosa :: arg(T) [segundos]-- (Reproduce y graba el RuidoRosa) --
 
-         ...
+ %                        ...
          
     GR.SineSweep = @SS;
     GR.InverseFilter = @IF;
