@@ -1,12 +1,15 @@
 function GR = Play_Rec()
+ 
+ %                       ...
+ %
  % GR = Play_Rec :: Funcion sin elementos de entrada
  % Funcion que reproduce y graba la opcion seleccionada:
- 
  % .SineSweep :: arg(T) [segundos]-- (Reproduce y graba el SineSweep) --
  % .InverseFilter :: arg(T) [segundos]-- (Reproduce y graba el InverseFilter) --
  % .RuidoRosa :: arg(T) [segundos]-- (Reproduce y graba el RuidoRosa) --
 
- %                        ...
+ %                       ...
+         
          
     GR.SineSweep = @SS;
     GR.InverseFilter = @IF;
