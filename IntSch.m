@@ -11,13 +11,13 @@ function [E] = IntSch(RI,Time)
 %
 %                    ...
 
-Int_arg = RI^2;
-t =(0:Time);
-E = zeros(1,Time);
+    Int_arg = RI^2;
+    t =(0:Time);
+    E = zeros(1,Time);
 
-    for i = (0:Time)
-        E(i)= integral(Int_arg,0,inf) - integral(Int_arg,0,t(i));
-    end
+        for i = (0:Time)
+            E(i)= integral(Int_arg,0,inf) - integral(Int_arg,0,t(i));
+        end
 
 end
 
