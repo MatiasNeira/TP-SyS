@@ -8,13 +8,10 @@ function Import = import_data()
 %
 %                  ...
 
-
 disp('----Elija las caracteristicas del archivo----')
 
 Import.RespuestaImpulso = @RI;
 Import.SS_FI = @SF;
-
-
 
 end
 
