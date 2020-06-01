@@ -1,6 +1,12 @@
-function [R(t)] = ConvLog(A(T))
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
-R(t)=20*log10(A(t)/max(A(t)));
-end
+function [Rt] = ConvLog(At)
+%                  ...
 
+% [Rt] = ConvLog(At)::Funcion con elemento de entrada At [array de valores que describen a una señal]
+% Funcion que convierte un impulso en escala logaritmica
+% Salida Rt : array de valores.
+
+%                  ...
+
+Rt=20*log10(At/max(At));
+
+end
