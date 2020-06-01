@@ -1,5 +1,4 @@
 function Import = import_data()
-
 %                  ...
 
 % Import=import_data()::Funcion sin elementos de entrada
@@ -24,10 +23,16 @@ function files = RI()
     file = uigetfile('*.wav','Seleccione uno o mas archivos (Respuesta al Impulso)','Multiselect','on');
     
     files = cell(1,length(file));
+        
+    Type_file = class(file); %depdniendo si se ingresa uno o mas archivos, esta variable dice que tipo de archivo es, 'char' si file es un solo archivo y 'cell' si son varios.
     
-    for i= 1 : length(file)
-        files{i} = audioread(file{i}); 
-    end
+     if Type_file == 'char'
+        files = audioread(file);
+     elseif Type_file == 'cell'
+        for i= 1 : length(file)
+            files{i} = audioread(file{i}); 
+        end
+     end
    
 end 
 
@@ -37,8 +42,14 @@ function files = SF()
       
       files = cell(1,length(file));
     
-      for i= 1 : length(file)
-        files{i} = audioread(file{i}); 
-      end
+      Type_file = class(file);%depdniendo si se ingresa uno o mas archivos, esta variable dice que tipo de archivo es, 'char' si file es un solo archivo y 'cell' si son varios.
+    
+     if Type_file == 'char'
+        files = audioread(file);
+     elseif Type_file == 'cell'
+        for i= 1 : length(file)
+                files{i} = audioread(file{i}); 
+        end
+     end
       
 end
