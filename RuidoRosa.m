@@ -24,6 +24,6 @@ function Xt= RuidoRosa(T)
     
     Xt = x(nT60+1:end);
     
-    plot(Xt);title('Ruido Rosa');ylabel('Amplitud');xlabel('frecuencia');
+    plot(Xt);title('Ruido Rosa');ylabel('Amplitud');xlabel('tiempo');
     
 end
