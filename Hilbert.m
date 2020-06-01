@@ -6,8 +6,8 @@ function soft_signal = Hilbert(original_signal)
 % Salida soft_signal :: array de valores de la señal suavizada.
 %                  ...
 
-T =(0:1:length(original_signal));
+t = (0:1:length(original_signal));
 
-soft_signal = conv(original_signal,1/(pi*T));
+soft_signal = conv(original_signal,1/(pi*t));
 
 end
