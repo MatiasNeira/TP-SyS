@@ -2,7 +2,7 @@ function [T60,EDT,D50,C80] = parametros(A,Fs)
 %                  ...
 
 % [T60,EDT,D50,C80] = parametros(A,Fs)::Funcion con elementos de entradas A
-% (señal de entrada) y Fs [Hz] frecuencia de muestreo.
+% [señal de entrada(Normalizada)] y Fs [Hz] frecuencia de muestreo.
 % Funcion que calcula parametros acusticos segun la norma señalada.
 % Salida [T60,EDT,D50,C80] : Parametros calculados entregados en un array.
 
