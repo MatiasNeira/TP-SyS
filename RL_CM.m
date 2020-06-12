@@ -1,11 +1,12 @@
 function Y = RL_CM(a)
 
-%
-%                        ...
+%                                       ...
+%                        
 % Funcion que aproxima una recta mediante una regresion lineal con un ajuste por cuadrados minimos
 % Parametros de entrada :: 
-%                           a: 
-%                        ...
+%                           a: array conformado por los valores (de la señal) a procesar 
+%
+%                                       ...
 
 
     n=length(a);
