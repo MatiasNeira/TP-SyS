@@ -1,23 +1,24 @@
-function [E] = IntSch(RI,Time)
+function Etsch = IntSch(original_signal,Norm_signal)
 
 %                     ...
 %
-% [E] = IntSch(RI,T)::Funcion con elementos de entradas :
-%     RI :: Respuesta al impulso
-%     Time :: tiempo [segundos]
-% Funcion que aproxima un impulso a una señal mas adecuada, a traves de la
+% [E] = IntSch(original_signal,Norm_signal)::Funcion con elementos de entradas :
+%     original_signal :: Respuesta al impulso [Señal original]
+%     Norm_signal :: Señal suavizada (Transformada de Hilbert) y Normalizada [Señal Normalizada]
+% Funcion que aproxima un impulso a una seÃ±al mas adecuada, a traves de la
 % transformada de Schroeder.
-% Salida E : array de valores.
+% Salida Etsch : Señal respuesta de Schroeder Normalizada
 %
 %                    ...
-
-    Int_arg = RI^2;
-    t =(0:Time);
-    E = zeros(1,Time);
-
-        for i = (0:Time)
-            E(i)= integral(Int_arg,0,inf) - integral(Int_arg,0,t(i));
-        end
+    fs = 44100;
+    
+    integral_limit = lundeby(Norm_signal);   %Limite de integracion
+    
+    htsch(integral_limit:-1:1) = (cumsum(original_signal(integral_limit:-1:1).^2)/...
+                      (sum(original_signal(1:length(original_signal))).^2));  
+                  
+    Etsch = 10*log10(htsch/max(abs(htsch))); %Normalizacion
 
 end
+
 
