@@ -1,12 +1,17 @@
-function [Rt] = ConvLog(At)
+function [Rt] = ConvLog(signal)
 %                  ...
 
-% [Rt] = ConvLog(At)::Funcion con elemento de entrada At [array de valores que describen a una señal]
-% Funcion que convierte un impulso en escala logaritmica
-% Salida Rt : array de valores.
+% [Rt] = ConvLog(signal)::Funcion con elemento de entrada signal [array de valores que describen a una seÃ±al]
+% Funcion que representa una señal logaritmicamente [Normalizacion]
+% Salida Rt : array de valores.[Señal Normalizada]
 
 %                  ...
 
-Rt=20*log10(At/max(At));
+    abs_signal = abs(signal);
+
+    max_signal = max(abs_signal);
+
+    Rt = 20*log10(abs_signal/max_signal);
 
 end
+
