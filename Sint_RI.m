@@ -1,4 +1,4 @@
-function y = Sint_RI(T,Fs,bandas)
+function y = Sint_RI(T,Fs,bandas,T60)
 % y = Sint_RI :: Funcion con argumentos de entrada
 % La funcion sintetiza la respuesta al impulso teniendo en cuenta las
 % frecuencias centrales normalizadas segun la banda.
@@ -7,7 +7,6 @@ function y = Sint_RI(T,Fs,bandas)
 % Bandas corresponde al filtrado por octava ("oct") o tercio de octava ("tercio").
 % 
     cant = length(f);
-    T60 = %agregar_correspondinte;
     y = zeros(1,cant);
     n = 1/Fs;
     t = (0:n:T);
