@@ -1,16 +1,18 @@
 function Mt = Modulacion(T,F0,Ff)
 
 %                    ...
-% 
-% Mt = Modulacion :: Funcion con argumento de entrada
-% Argumentos : T [segundos] tiempo de duracion
-%              F0 [Hz] frecuencia inicial
-%              Ff [Hz] frecuencia final
-% La funcion realiza una modulacion de compensacion 
+
+% Mt = Modulacion(T, F0, Ff) :: Funcion que realiza una modulacion de compensacion 
 % de eneria para el filtro inverso
 % Procesando los datos : w0,wf,Fs [Hz] y t (array)
+% Funcion con argumento de entrada:  
+%               T [segundos] = tiempo de duracion
+%              F0 [Hz] = frecuencia inicial
+%              Ff [Hz] = frecuencia final
+% 
 % ..nota:: t es un array con "m" puntos entre 0 y T
-%
+% Salida = Mt = modulacion 
+
 %                    ...
     
     w0 = 2*pi*F0;
