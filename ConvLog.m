@@ -1,11 +1,14 @@
 function [Rt] = ConvLog(signal)
-%                  ...
-
-% [Rt] = ConvLog(signal)::Funcion con elemento de entrada signal [array de valores que describen a una seÃ±al]
-% Funcion que representa una señal logaritmicamente [Normalizacion]
-% Salida Rt : array de valores.[Señal Normalizada]
 
 %                  ...
+
+% [Rt] = ConvLog(signal) :: Funcion que representa una señal logaritmicamente [Normalizacion]
+% Funcion con elemento de entrada: 
+%               signal =  array de valores que describen a una señal
+% Salida = Rt = array de valores.[Señal Normalizada]
+
+%                  ...
+
 
     abs_signal = abs(signal);
 
