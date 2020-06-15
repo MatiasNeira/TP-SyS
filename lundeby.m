@@ -1,8 +1,8 @@
-function [cruce]=lundeby(Signal)
+function [cruce] = lundeby(Signal)
 
 %                           ... 
 
-%   Funcion que implementa el metodo de Lundeby para determinar el extremo superior de
+%   [cruce] = lundeby(signal)::Funcion que implementa el metodo de Lundeby para determinar el extremo superior de
 %   integracion de la integral de Schroeder.
 %   Funcion con elementos de entrada: 
 %                           Estructura de la Señal
