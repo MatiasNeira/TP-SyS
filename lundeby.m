@@ -1,27 +1,26 @@
-function [cruce] = lundeby(Signal)
-
-%                           ... 
-
-%   [cruce] = lundeby(signal)::Funcion que implementa el metodo de Lundeby para determinar el extremo superior de
-%   integracion de la integral de Schroeder.
-%   Funcion con elementos de entrada: 
-%                           Estructura de la Señal
-%                           Signal.amplitudvector = double
-%                           Signal.SampleRate = int
-%                           Signal.Duracion = duration
-%   Salida: 
-%       punto = Limite de integracion de Schroeder 
+function [cruce]=lundeby(Signal)
+%% lundeby
 %
+%   Implementa el metodo de Lundeby para determinar el extremo de
+%   integracion de la integral de Schroeder.
+%
+%
+%   INPUTS:
+%       Estructura de la SeÃ±al
+%       Signal.amplitudvector = double
+%       Signal.SampleRate = int
+%       Signal.Duracion = duration
+%   OUTPUT:
+%       punto = Limite de integracion de Schroeder
+% 
 %   Esta funcion es una adaptacion de la funcion lundeby,
 %   creada para la Universidad de San Pablo por Bruno S. Masiero (2006). 
 %   https://www.mathworks.com/matlabcentral/fileexchange/11392-acmus-room-acoustic-parameters
 
-%                           ...
-
     Et = Signal.^2;
     fm = 44100;
 
-    %Calcula el nivel de ruido del 10% final de la señal
+    %Calcula el nivel de ruido del 10% final de la seï¿½al
 
     ruidodb = mean(Et(round(.9*length(Et)):end));
 
@@ -47,10 +46,10 @@ function [cruce] = lundeby(Signal)
     elseif r<10
         r=10;
     end
-    [A,B] = cuadMin(tiempo(1:r),mediadB(1:r));
+    [A,B] = RL_CM(tiempo(1:r),mediadB(1:r));
     encuentro = (ruidodb-A)/B;
     if ruidodb > -20
-        %Relacion se�al/ruido insuficiente
+        %Relacion seï¿½al/ruido insuficiente
         cruce = length(Et);
         
     else
@@ -79,7 +78,7 @@ function [cruce] = lundeby(Signal)
             mediadB = media;
 
             clear A B noise energia_ruido rms_dB;
-            [A,B] = cuadMin(tiempo,mediadB);
+            [A,B] = RL_CM(tiempo,mediadB);
             %Nueva media de la energia del ruido, iniciando en el punto de la linea de tendencia 10dB por debajo del encuentro.
             noise = Et(round(encuentro+delta):end);
             if (length(noise) < round(.1*length(Et)))
