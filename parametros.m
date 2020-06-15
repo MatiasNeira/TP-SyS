@@ -1,4 +1,5 @@
 function [T60,EDT,D50,C80] = parametros(A,Fs)
+
 %                  ...
 
 % [T60,EDT,D50,C80] = parametros(A,Fs)::Funcion con elementos de entradas A
