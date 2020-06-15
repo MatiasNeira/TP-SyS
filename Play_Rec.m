@@ -8,13 +8,11 @@ function GR = Play_Rec()
  % .InverseFilter :: arg(T) [segundos]-- (Reproduce y graba el InverseFilter) --
  % .RuidoRosa :: arg(T) [segundos]-- (Reproduce y graba el RuidoRosa) --
 
- %                       ...
-         
-         
+ %                       ...     
     GR.SineSweep = @SS;
     GR.InverseFilter = @IF;
     GR.RuidoRosa = @RR;
-
+    
 end
 function Sine = SS(T,F0,Ff)
 
@@ -25,7 +23,7 @@ function Sine = SS(T,F0,Ff)
         audiowrite('sinesweep.wav',Xt,Fs);
     
         bits=16; %bits de grabacion
-        canales = 2; %dos canales para que grabe stereo
+        canales = 1; %dos canales para que grabe stereo
         input = -1; %por default el input del mic en la compu es -1
         recorder = audiorecorder(Fs,bits,canales,input); %informacion y forma en la que graba
 
@@ -48,7 +46,7 @@ function Inv = IF(T,F0,Ff)
         audiowrite('InverseFilter.wav',Xt,Fs);
         
         bits=16; %bits de grabacion
-        canales = 2; %dos canales para que grabe stereo
+        canales = 1; %dos canales para que grabe stereo
         input = -1; %por default el input del mic en la compu es -1
         recorder = audiorecorder(Fs,bits,canales,input); %informacion y forma en la que graba
 
@@ -72,7 +70,7 @@ function Ruido = RR(T)
         audiowrite('RuidoRosa.wav',Xt,Fs);
         
         bits=16; %bits de grabacion
-        canales = 2; %dos canales para que grabe stereo
+        canales = 1; %dos canales para que grabe stereo
         input = -1; %por default el input del mic en la compu es -1
         recorder = audiorecorder(Fs,bits,canales,input); %informacion y forma en la que graba
 
