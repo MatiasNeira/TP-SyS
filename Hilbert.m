@@ -1,9 +1,12 @@
 function soft_signal = Hilbert(original_signal)
+
 %                  ...
 
-% soft_signal = Hilbert(original_signal)::Funcion con elemento de entrada original_signal [array de valores de una seÃ±al original]
-% Funcion que suaviza una seÃ±al a traves de la transformadad de Hilbert.
-% Salida soft_signal :: array de valores de la seÃ±al suavizada.
+% soft_signal = Hilbert(original_signal) :: Funcion que suaviza una señal a traves de la transformada de Hilbert
+% Funcion con elemento de entrada: 
+%               original_signal =  array de valores de una señal original
+% Salida = soft_signal = array de valores de la señal suavizada
+
 %                  ...
 
     transformada = hilbert(original_signal);
