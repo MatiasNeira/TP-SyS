@@ -1,26 +1,27 @@
 function [cruce]=lundeby(Signal)
-%% lundeby
-%
-%   Implementa el metodo de Lundeby para determinar el extremo de
+
+%                           ... 
+
+%   Funcion que implementa el metodo de Lundeby para determinar el extremo superior de
 %   integracion de la integral de Schroeder.
+%   Funcion con elementos de entrada: 
+%                           Estructura de la Señal
+%                           Signal.amplitudvector = double
+%                           Signal.SampleRate = int
+%                           Signal.Duracion = duration
+%   Salida: 
+%       punto = Limite de integracion de Schroeder 
 %
-%
-%   INPUTS:
-%       Estructura de la Señal
-%       Signal.amplitudvector = double
-%       Signal.SampleRate = int
-%       Signal.Duracion = duration
-%   OUTPUT:
-%       punto = Limite de integracion de Schroeder
-% 
 %   Esta funcion es una adaptacion de la funcion lundeby,
 %   creada para la Universidad de San Pablo por Bruno S. Masiero (2006). 
 %   https://www.mathworks.com/matlabcentral/fileexchange/11392-acmus-room-acoustic-parameters
 
+%                           ...
+
     Et = Signal.^2;
     fm = 44100;
 
-    %Calcula el nivel de ruido del 10% final de la se�al
+    %Calcula el nivel de ruido del 10% final de la señal
 
     ruidodb = mean(Et(round(.9*length(Et)):end));
 
