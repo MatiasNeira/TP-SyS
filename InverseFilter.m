@@ -1,13 +1,14 @@
 function iF = InverseFilter(T,F0,Ff)
 
 %                      ...
-%                      
-% iF = InverseFilter :: Funcion con argumento de entrada.
-% Argumentos : T [segundos] tiempo de duracion.
-%              F0 [Hz] frecuencia inicial.
-%              Ff [Hz] frecuencia final.
-% La funcion realiza un filtro inverso de tiempo T [segundos]
+                      
+% iF = InverseFilter(T,F0,Ff) :: Funcion que realiza un filtro inverso de tiempo T [segundos]
+% Funcion con argumento de entrada:
+%               T[segundos] = tiempo de duracion.
+%              F0[Hz] = frecuencia inicial.
+%              Ff[Hz] = frecuencia final.
 % 
+
 %                      ...
     Fs=44100;
     m=Fs*T;
