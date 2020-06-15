@@ -1,14 +1,16 @@
-function Xt= RuidoRosa(T)
+function Xt = RuidoRosa(T)
+
 %                    ...
-%
-% Xt= RuidoRosa :: funcion con argumento T [segundos] de entrada
-% La funcion crea la generacion de un ruido rosa a traves de una serie de
+
+% Xt = RuidoRosa :: La funcion crea la generacion de un ruido rosa a traves de una serie de
 % valores:
 %   Fs [Hz] -- Frecuencia de muestreo
 %   Nx -- Cantidad de muestras
 %   A y B coeficientes del filtro
-% Salida Xt :: array de valores y un plot
-%
+% Funcion con argumento de entrada:  
+%                   T[segundos] = duracion
+% Salida = Xt = array de valores correspondientes a la señal de ruido rosa
+
 %                    ...
 
     Fs = 44100;
