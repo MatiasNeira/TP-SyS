@@ -1,5 +1,4 @@
 function Xt = SineSweep(T,F0,Ff)
-
 %                   ...
 %
 % Xt=SineSweep :: Funcion con argumentos de entrada
@@ -11,8 +10,6 @@ function Xt = SineSweep(T,F0,Ff)
 % ..nota:: t es un array con "m" puntos entre 0 y T.
 %
 %                   ...
-
-    
     w0 = 2*pi*F0;
     wf = 2*pi*Ff;
     Fs=44100;
@@ -24,5 +21,14 @@ function Xt = SineSweep(T,F0,Ff)
     
     Xt = sin(k*(exp(t/L)-1));
     
+ % Test   
+   % Test_SS(t,Xt)  %Descomentar para testear
+
+end
+
+function Test = Test_SS(t,Xt)
+% ---Test para el SineSweep :: representacion en un grafico de Amplitud vs Tiempo ---
+
     plot(t,Xt);title('Sine-Sweep');ylabel('Amplitud');xlabel('Tiempo')
+
 end
