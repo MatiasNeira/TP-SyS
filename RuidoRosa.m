@@ -1,5 +1,4 @@
 function Xt= RuidoRosa(T)
-
 %                    ...
 %
 % Xt= RuidoRosa :: funcion con argumento T [segundos] de entrada
@@ -12,7 +11,6 @@ function Xt= RuidoRosa(T)
 %
 %                    ...
 
-
     Fs = 44100;
     Nx = Fs*T;
     B = [0.049922035 -0.095993537 0.050612699 -0.004408786]; 
@@ -23,7 +21,16 @@ function Xt= RuidoRosa(T)
     x = filter(B,A,v);
     
     Xt = x(nT60+1:end);
+
+% Test
+    %Test_RR(Xt)    %Descomentar para testear
     
+end
+
+function Test = Test_RR(Xt)
+%------ Test del Ruido Rosa con una duracion de T segundos y la
+%       representacion en un plot ----------------
+
     plot(Xt);title('Ruido Rosa');ylabel('Amplitud');xlabel('tiempo');
-    
+
 end
