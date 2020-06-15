@@ -1,11 +1,17 @@
 function y = Sint_RI(T,Fs,bandas,T60)
-% y = Sint_RI :: Funcion con argumentos de entrada
-% La funcion sintetiza la respuesta al impulso teniendo en cuenta las
-% frecuencias centrales normalizadas segun la banda.
-% Argumentos T,Fs,bandas :: T[segundos];Fs[Hz] 
-%..notas:: T es el tiempo de duracion 
-% Bandas corresponde al filtrado por octava ("oct") o tercio de octava ("tercio").
-% 
+
+%                       ...
+
+% y = Sint_RI :: Funcion que sintetiza la respuesta al impulso teniendo en cuenta las
+% frecuencias centrales normalizadas segun la banda
+% Funcion con argumentos de entrada: 
+%                T[segundos] = duracion
+%                Fs[Hz] = Frecuencia de sampleo
+%                Bandas = corresponde al filtrado por octava ("oct") o tercio de octava ("tercio").
+% Salida = y = Respuesta al impulso sintetizada 
+
+%                      ...
+
     cant = length(f);
     y = zeros(1,cant);
     n = 1/Fs;
