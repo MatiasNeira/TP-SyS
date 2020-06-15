@@ -2,7 +2,7 @@ function [T60,EDT,D50,C80] = parametros(A,Fs)
 
 %                  ...
 
-% Funcion que calcula parametros acusticos segun la norma señalada.
+% [T60, EDT, D50, C80] = parametros (A,Fs) :: Funcion que calcula parametros acusticos segun la norma señalada.
 % Funcion con elementos de entrada: 
 %            A = [señal de entrada(Normalizada)]
 %            Fs = frecuencia de muestreo [Hz].
