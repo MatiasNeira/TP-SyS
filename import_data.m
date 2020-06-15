@@ -2,7 +2,7 @@ function Import = import_data()
 %                  ...
 %
 % Import=import_data()::Funcion sin elementos de entrada
-% Funcion que importa archivos ´.wav´ seleccionados y recopila sus correspodientes datos de forma numerica
+% Funcion que importa archivos Â´.wavÂ´ seleccionados y recopila sus correspodientes datos de forma numerica
 % .RespuestaImpulso :: Importa la RI seleccionada y recopila sus datos
 % .SS_FI :: Importa el sine-sweep y el filtro inverso seleccionados y recopila sus dato
 %
@@ -48,5 +48,5 @@ function files = SF()
                 files{i} = audioread(file{i}); 
         end
      end
-      
+     
 end
