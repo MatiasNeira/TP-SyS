@@ -18,13 +18,87 @@ function [EDT,T10,T20,T30,C80,D50] = Acustic_parameters(Soft_signal,original_Sig
 
 %                  ...
 
-%%
-
-% Calculo de los parametros C80 y D50
-%       
-
     Fs = 44100;
+
+%% Transformacion del eje X de muestras a Tiempo [Segundos]
+
+    x = 0:1/Fs:(length(Soft_signal)-1)/Fs; 
     
+
+%% Encuentro el maximo valor que toma la funcion en el dominio [maxValue_X]
+    
+    maxValue_Y = max(Soft_signal);
+        for i = 1:0.10:length(Soft_signal)
+            if Soft_signal(i) == maxValue_Y
+                break
+            end
+        end
+    maxValue_X = i; % i-ésima muestra
+    
+
+%% Valor del dominio de la señal despues de una decaida de 5dB desde su pico maximo [X_5dBDecay]
+
+    Y_5dBDecay = max(Soft_signal)-5;
+        for i = 1:length(Soft_signal)
+            if round(Soft_signal(i)) == Y_5dBDecay
+                break
+            end
+        end
+    X_5dBDecay = i; % i-ésima muestra
+    
+%% Cálculo del EDT
+
+    T0_EDT = x(maxValue_X);
+    Tf_EDT = x(X_5dBDecay);
+      
+    EDT = 6*(Tf_EDT - T0_EDT);
+
+%% Calculo del T10
+    Y_15dBDecay = max(Soft_signal)-15;
+        for i = 1:length(Soft_signal)
+            if round(Soft_signal(i)) == Y_15dBDecay
+                break
+            end
+        end
+    X_15dBDecay = i; % i-ésima muestra
+    
+    % Transformacion de muestras a segundos.
+    T0_T10 = x(X_5dBDecay);
+    Tf_T10 = x(X_15dBDecay);
+    
+    T10 = 6*(Tf_T10 - T0_T10);
+    
+%% Calculo del T20  
+    Y_25dBDecay = max(Soft_signal)-25;
+        for i = 1:length(Soft_signal)
+            if round(Soft_signal(i)) == Y_25dBDecay
+                break
+            end
+        end
+    X_25dBDecay = i; % i-ésima muestra
+    
+    % Transformacion de muestras a segundos.
+    T0_T20 = x(X_5dBDecay);
+    Tf_T20 = x(X_25dBDecay);
+    
+    T20 = 3*(Tf_T20 - T0_T20);
+%% Calculo del T30
+    Y_35dBDecay = max(Soft_signal)-35;
+        for i = 1:length(Soft_signal)
+            if round(Soft_signal(i)) == Y_35dBDecay
+                break
+            end
+        end
+    X_35dBDecay = i; % i-ésima muestra
+    
+    % Transformacion de muestras a segundos.
+    T0_T30 = x(X_5dBDecay);
+    Tf_T30 = x(X_35dBDecay);
+    
+    T30 = 2*(Tf_T30 - T0_T30);
+    
+ %% Calculo del C80 y D50
+ 
     Max_Signal = max(original_Signal);            %Máximo del Impulso
     Max_Signal = find(original_Signal == Max_Signal);
     
@@ -33,55 +107,6 @@ function [EDT,T10,T20,T30,C80,D50] = Acustic_parameters(Soft_signal,original_Sig
     Ms80 = (0.08*Fs);               %Redondeo a 80ms
     
     C80 = 10*log10(trapz(pt(Max_Signal:Max_Signal + Ms80))/trapz(pt(Max_Signal + Ms80:end)));    
-    D50 = 100*(sum(pt(Max_Signal:Max_Signal + Ms50))/sum(pt(Max_Signal:end)));  
-    
-%%  Tiempos de reverberacion
-
-
-    Fs = 44100;
-    x = 0:1/Fs:(length(Soft_signal)-1)/Fs;
-
-
-    Max_value = find(round(Soft_signal) == max(Soft_signal));
-    Max_value = max(Max_value);               
-
-    T_value = find(round(Soft_signal) == round(max(Soft_signal)-5));    
-    T_value = T_value(T_value > Max_value);
-    T_value = T_value(1);                                      
-
-    % Calculo del EDT (Early Decay Time)
-    y1EDT = Max_value;
-    y2EDT = find(round(Soft_signal) <= round(max(Soft_signal)-10),1,'first');    
-
-    x1EDT = x(y1EDT);
-    x2EDT = x(y2EDT);
-
-    EDT = 6*(x2EDT - x1EDT);
-
-    % Calculo del T10
-
-    y2T10 = find(round(Soft_signal) <= round(max(Soft_signal)-15),1,'first');    
-
-    x1T10 = x(T_value);
-    x2T10 = x(y2T10);
-
-    T10 = 6*(x2T10 - x1T10);
-
-    % Calculo del T20
-
-    y2T20 = find(round(Soft_signal) <= round(max(Soft_signal)-25),1,'first');
-
-    x1T20 = x(T_value);
-    x2T20 = x(y2T20);
-
-    T20 = 3*(x2T20 - x1T20);
-
-    % Calculo del T30
-    y2T30 = find(round(Soft_signal-5) == round(max(Soft_signal)-35),1, 'first');
-
-    x1T30 = x(T_value);
-    x2T30 = x(y2T30);
-
-    T30 = 2*(x2T30 - x1T30);
+    D50 = 100*(sum(pt(Max_Signal:Max_Signal + Ms50))/sum(pt(Max_Signal:end)));
 
 end
