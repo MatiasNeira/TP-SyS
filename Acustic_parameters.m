@@ -1,19 +1,21 @@
-function [EDT,T10,T20,T30,C80,D50] = Acustic_parameters(Soft_signal,original_Signal)
+function [EDT,T10,T20,T30,T60,C80,D50] = Acustic_parameters(Soft_signal,original_Signal,Method_T60)
 %%   
 %                  ...
 
-% [EDT,T10,T20,T30,C80,D50] = Acustic_parameters(Soft_signal,original_Signal):: Funcion con elementos de entrada
+% [EDT,T10,T20,T30,C80,D50] = Acustic_parameters(Soft_signal,original_Signal,Method_T60):: Funcion con elementos de entrada
 % Funcion que calcula parametros acusticos segun Norma señalada.
 % Argumentos de Entrada:: 
 %                           Soft_signal : Señal suavizada
 %                           original_signal : Señal original, sin
 %                           procesamiento.
+%                           Method_T60 : Metodo de obtencion del T60 -- A
+%                           traves del T10, T20 ó T30.
 % Elementos de salida :: 
 %       EDT = Early Decay Time en [s]
 %       T20 = Parametro T20 [s]
 %       T30 = Parametro T30 [s]
-%       C80 = Claridad Musical Media (C80) [dB]
-%       C50 = Claridad de la Voz (C50) [dB]
+%       T60 = Parametro T60 [s]
+%       C80 = Claridad             (C80) [dB]
 %       D50 = Definicion de la voz (D50) [Porcentaje]
 
 %                  ...
@@ -104,7 +106,17 @@ function [EDT,T10,T20,T30,C80,D50] = Acustic_parameters(Soft_signal,original_Sig
     Tf_T30 = x(X_35dBDecay);
     
     T30 = 2*(Tf_T30 - T0_T30);
-    
+%% Calculo del T60 dependiendo el método
+
+    switch Method_T60
+        case 'T10' 
+            T60 = T10*6;
+        case 'T20'
+            T60 = T20*3;
+        case 'T30'
+            T60 = T30*2;
+    end    
+
  %% Calculo del C80 y D50
  
     Max_Signal = max(original_Signal);            %Máximo del Impulso
