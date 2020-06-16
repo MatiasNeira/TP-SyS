@@ -20,7 +20,7 @@ function [EDT,T10,T20,T30,C80,D50] = Acustic_parameters(Soft_signal,original_Sig
 
 %%
 
-% Calculo de los parametros energ?ticos de claridad y definici?n
+% Calculo de los parametros C80 y D50
 %       
 
     Fs = 44100;
