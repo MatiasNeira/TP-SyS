@@ -47,9 +47,17 @@ function [EDT,T10,T20,T30,C80,D50] = Acustic_parameters(Soft_signal,original_Sig
     X_5dBDecay = i; % i-ésima muestra
     
 %% Cálculo del EDT
-
+    Y_10dBDecay = max(Soft_signal)-10;
+        for i = 1:length(Soft_signal)
+            if round(Soft_signal(i)) == Y_10dBDecay
+                break
+            end
+        end
+    X_10dBDecay = i; % i-ésima muestra
+    
+    % Transformacion de muestras a segundos.
     T0_EDT = x(maxValue_X);
-    Tf_EDT = x(X_5dBDecay);
+    Tf_EDT = x(X_10dBDecay);
       
     EDT = 6*(Tf_EDT - T0_EDT);
 
