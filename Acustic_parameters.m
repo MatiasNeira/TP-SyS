@@ -30,7 +30,7 @@ function [EDT,T10,T20,T30,T60,C80,D50] = Acustic_parameters(Soft_signal,original
 %% Encuentro el maximo valor que toma la funcion en el dominio [maxValue_X]
     
     maxValue_Y = max(Soft_signal);
-        for i = 1:0.10:length(Soft_signal)
+        for i = 1:length(Soft_signal)
             if Soft_signal(i) == maxValue_Y
                 break
             end
