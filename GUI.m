@@ -8,14 +8,12 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
     text_1_1 = uicontrol(f,'Style','text',...                 
         'String','Menu Principal', ...
         'FontSize',(12),	...                 
-        'Position',[100 190 300 50]);
-%     medicionRF = uicontrol('Style', 'pushbutton',...
-       % 'String','Medir ruido de fondo (RF)','Position',[175 250 150 50],...
-        %'Callback',{@ruido_fondo_Callback});    
+        'Position',[100 190 300 50]);  
     text_1_2 = uicontrol(f,'Style','text',...                 
         'String','Adquisicion de Datos',...
          'FontSize',(10),	...    
         'Position',[100 140 300 50]);
+  
     Sinte_RI = uicontrol('Style', 'pushbutton',...
         'String','Sintetizar RI','Position',[50 125 150 50],...
         'Callback',{@Sint_RI_Callback});
@@ -40,35 +38,6 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
     f.NumberTitle = 'off';
     f.Visible = 'on';
 
-    %%
-%     function ruido_fondo_Callback(source,eventdata)
-%         g = figure('Visible','off','Position',[500 500 200 100]);
-%         text_2_1 = uicontrol(g,'Style','text',...                 
-%         'String','Ruido de Fondo Obtenido',...
-%          'FontSize',(10),	...    
-%         'Position',[25 40 150 50]);
-%        
-%         panel_2 = uipanel(g,'Title','',... 
-%         'Position',[.1 .29 .80 .30]);
-%        
-%         text_2_2 = uicontrol(g,'Style','text',...
-%             'String','respuesta de la medicion',...          
-%             'Position',[25 25 150 50]); 
-%       
-%     
-%         g.Units = 'normalized';
-%         text_2_1.Units = 'normalized';
-%         text_2_1.Units = 'normalized';
-%         htext.Units = 'normalized';
-%         hpopup.Units = 'normalized';
-%         ha.Units = 'normalized';
-%     
-%         g.Name = 'Medicion Ruido de Fondo';
-%         movegui(g,'center')
-%         g.MenuBar = 'none';
-%         g.NumberTitle = 'off';
-%         g.Visible = 'on';  
-%      end
  %%
     function Sint_RI_Callback(source,eventdata)
         g = figure('Visible','off','Position',[1000 1000 250 500]);
@@ -130,18 +99,26 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
    
     T = 1;
     bandas = 0;
-    x = cell(7,1);
-    a = 1;
+   a=0;
+    ter = 1;
+    oct = 1;  
+  
       function popup_Callback(source,eventdata)
         str = source.String;
         val = source.Value;
         switch str{val}
            case 'Filtro de Octava'
               bandas == 'oct'
+              ter=0;
+              a=1;
+            g = Sint_RI(T,'oct');
               set(hpopup_1_2,'visible','on')
               set(hpopup_1_3,'visible','off')
             case 'Filtro de Tercio de Octava'
-                bandas == 'tercio'
+                bandas == 'ter'
+                oct=0;
+                a=2;
+                g = Sint_RI(T,'ter');
                 set(hpopup_1_3,'visible','on')
                 set(hpopup_1_2,'visible','off')
         end
@@ -152,19 +129,19 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
              val = source.Value;
                 switch str{val}
                     case '125'
-                       a=1;
+                       oct=1;
                     case'250'
-                        a=2;
+                        oct=2;
                     case'500'
-                        a=3;
+                        oct=3;
                     case'1000'
-                        a=4;
+                        oct=4;
                     case'2000'
-                        a=5;
+                        oct=5;
                     case'4000'
-                        a=6;
+                        oct=6;
                     case'8000'
-                        a=7;
+                        oct=7;
                 
                 end
                 
@@ -172,50 +149,54 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
       function popup2_Callback (source,eventdata)
            str = source.String;
            val = source.Value;
+         
                 switch str{val}
                     case'125'
-                        a=1;
+                        ter=1;
                     case'160'
-                        a=2;
+                        ter=2;
                     case'200'
-                        a=3;
+                        ter=3;
                     case'250'
-                        a=4;
+                        ter=4;
                     case'315'
-                        a=5;
+                        ter=5;
                     case'400'
-                        a=6;
+                        ter=6;
                     case'500'
-                        a=7;
+                        ter=7;
                     case'630'
-                        a=8;
+                        ter=8;
                     case'800'
-                        a=9;
+                        ter=9;
                     case'1000'
-                        a=10;
+                        ter=10;
                     case'1250'
-                        a=11;
+                        ter=11;
                     case'1600'
-                        a=12;
+                        ter=12;
                     case'2250'
-                        a=13;
+                        ter=13;
                     case'3150'
-                        a=14;
+                        ter=14;
                     case'4000'
-                        a=15;
+                        ter=15;
                     case'5000'
-                        a=16;
+                        ter=16;
                     case'6000'
-                        a=17;
+                        ter=17;
                     case'8000'
-                        a=18;
+                        ter=18;
                 end
         end
       function sintetizar_Callback(source,eventdata)
-        axes(ax_2);
-            T= str2num(get(edit_1,'String'));
-            x = Sint_RI(T,bandas);
-            plot(x{a,1});
+            T= str2double(get(edit_1,'String'));
+            g = Sint_RI(T,'oct');
+           if a==1 
+           plot(g{oct});
+           elseif a==2
+           plot(g{ter});
+           end
 
       end
     end
@@ -337,15 +318,17 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
     end
 %%
     function procesamiento_Callback(source,eventdata)
+   
+          
        i = figure('Visible','off','Position',[200 200 1000 500]);
        procesar = uicontrol('Style', 'pushbutton',...
         'String','Procesar','Position',[50 450 150 50],...
         'Callback',{@proc_Callback});
-       gurdar_tabla = uicontrol('Style', 'pushbutton',...
-        'String','Guardar Tabla','Position',[50 30 150 50],...
-        'Callback',{@guardar_tabla_Callback});
        
-       text_4_1 = uicontrol(i,'Style','text','String','Calcular T60 a partir de:','Position',[75 420 100 25]);
+       actualizar_tabla = uicontrol('Style', 'pushbutton',...
+        'String','Actualizar Tabla','Position',[50 25 150 60],...
+        'Callback',{@actualizar_tabla_Callback});
+      
        text_4_2 = uicontrol(i,'Style','text','String','Banda a Plotear','Position',[75 350 100 25]);
        text_4_3 = uicontrol(i,'Style','text','String','Datos del espectro completo:','Position',[75 250 100 25]);
        
@@ -361,7 +344,8 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
        
        text_4_7 = uicontrol(i,'Style','text','String','Suavizados','FontSize',(7),'Position',[550 115 70 10]);
        ax3_4 = axes('Parent',i,'Position',[.25 .05 .7 .15]);
-       
+        
+ 
         hpopup = uicontrol('Style', 'popupmenu',...
         'String',{'Filtro de Octava','Filtro de Tercio de Octava'},'Position',[75 300 100 25],...
         'Callback',{@popup_Callback});
@@ -374,15 +358,12 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
             'String',{'125','160','200','250','315','400','500','630','800','1000','1250','1600','2250','3150','4000','5000','6000','8000'},'Position',[75 300 100 25],...
             'Callback',{@popup2_Callback});
        
-        hpopup3 = uicontrol('Visible','on','Style', 'popupmenu',...
-            'String',{'T10','T20','T30'},'Position',[75 390 100 25],...
-            'Callback',{@popup3_Callback});
         
        
-       ter = zeros(18,6);
-       oct = zeros(7,6);
-       tb_ter = uitable(i,'Data',ter,'Position',[15 90 200 150],'ColumnName',{'EDT';'T10';'T20';'T30';'C80';'D50'},'RowName',{'125';'160';'200';'250';'315';'400';'500';'630';'800';'1000';'1250';'1600';'2250';'3150';'4000';'5000';'6000';'8000'});
-       tb_oct = uitable(i,'Data',oct,'Position',[15 90 200 150],'ColumnName',{'EDT';'T10';'T20';'T30';'C80';'D50'},'RowName',{'125';'250';'500';'1000';'2000';'4000';'8000'});
+       ter = zeros(18,9);
+       oct = zeros(7,9);
+       tb_ter = uitable(i,'Data',ter,'Position',[15 90 200 150],'ColumnName',{'EDT';'T10';'T20';'T30';'T60(T10)';'T60(T20)';'T60(T30)';'C80';'D50'},'RowName',{'125';'160';'200';'250';'315';'400';'500';'630';'800';'1000';'1250';'1600';'2250';'3150';'4000';'5000';'6000';'8000'});
+       tb_oct = uitable(i,'Data',oct,'Position',[15 90 200 150],'ColumnName',{'EDT';'T10';'T20';'T30';'T60(T10)';'T60(T20)';'T60(T30)';'C80';'D50'},'RowName',{'125';'250';'500';'1000';'2000';'4000';'8000'});
      
     
     i.Units = 'normalized';
@@ -399,21 +380,8 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
     i.NumberTitle = 'off';
     i.Visible = 'on';
     
- ter = zeros(18,6);
- oct = zeros(7,6);
- T = 0;  
-      function popup3_Callback(source,eventdata)
-        str = source.String;
-        val = source.Value;
-        switch str{val}
-           case 'T10'
-               T='T10'
-           case 'T20'
-               T='T20'
-           case 'T30'
-               T='T30'
-        end
-        end
+   
+     
 type_filter_oct = cell(7,1);
 X_max = zeros(7,1);
 second_part_oct = cell(7,1);
@@ -422,6 +390,7 @@ H_oct = cell(7,1);
 Deci_B_oct= cell(7,1);
 schroeder_oct = cell(7,1);
 fc_oct = [125,500,1000,2000,4000,8000];
+M=zeros(9,6);
 for i=1:6
 filter = filt();
 type_filter_oct{i} = filter.Octava(RI,int2str(fc_oct(i))); % Filtrado de la señal
@@ -431,7 +400,7 @@ cut_signal_oct{i} = type_filter_oct{i}(second_part_oct{i}); %cut_signal es la pa
 H_oct{i} = Hilbert(cut_signal_oct{i}); 
 Deci_B_oct{i} = ConvLog (H_oct{i});
 schroeder_oct{i} = IntSch(cut_signal_oct{i},Deci_B_oct{i});
-[oct(i,:)] = Acustic_parameters(H_oct{i},type_filter_oct{i},T);
+[M(1,i),M(2,i),M(3,i),M(4,i),M(5,i),M(6,i),M(7,i)] = Acustic_parameters(schroeder_oct{i},RI,'T10');
 end
 
 
@@ -443,6 +412,7 @@ H_ter = cell(18,1);
 Deci_B_ter = cell(18,1);
 schroeder_ter = cell(18,1);
 fc_ter = [125,160,200,315,400,500,630,800,1000,1250,1600,2250,3150,4000,5000,6000,8000];
+M_ter=zeros(9,17);
 for i=1:17
 filter = filt();
 type_filter_ter{i} = filter.Tercio(RI,int2str(fc_ter(i))); % Filtrado de la señal
@@ -453,22 +423,41 @@ H_ter{i} = Hilbert(cut_signal_ter{i});
 Deci_B_ter{i} = ConvLog (H_ter{i});
 schroeder_ter{i} = IntSch(cut_signal_ter{i},Deci_B_ter{i});
 
-[ter(i,:)] = Acustic_parameters(H_ter{i},type_filter_ter{i},T);
+[M_ter(1,i),M_ter(2,i),M_ter(3,i),M_ter(4,i),M_ter(5,i),M_ter(6,i),M_ter(7,i)] = Acustic_parameters(schroeder_ter{i},RI,'T10');
 end
 
-
    
-tb_ter = uitable(i,'Data',ter,'Position',[15 90 200 150],'ColumnName',{'EDT';'T10';'T20';'T30';'C80';'D50'},'RowName',{'125';'160';'200';'250';'315';'400';'500';'630';'800';'1000';'1250';'1600';'2250';'3150';'4000';'5000';'6000';'8000'});
-tb_oct = uitable(i,'Data',oct,'Position',[15 90 200 150],'ColumnName',{'EDT';'T10';'T20';'T30';'C80';'D50'},'RowName',{'125';'250';'500';'1000';'2000';'4000';'8000'});
      
-
+ 
 
 
 Vis_1=0;
 Vis_2=0;
 a_oct=0;
-a_ter=0;
+a_ter=0; 
 
+ 
+     function actualizar_tabla_Callback(~,~)
+       
+           for i=1:5
+               for j=1:17
+                   tb_ter.Data(j,i)=M_ter(i,j);
+                   tb_ter.Data(j,6)=M_ter(3,j)*3;
+                   tb_ter.Data(j,7)=M_ter(4,j)*2;
+                   tb_ter.Data(j,8)=M_ter(6,j);
+                   tb_ter.Data(j,9)=M_ter(7,j);
+               end
+               for j=1:6
+                   tb_oct.Data(j,i)=M(i,j);
+                   tb_oct.Data(j,6)=M(3,j)*3;
+                   tb_oct.Data(j,7)=M(4,j)*2;
+                   tb_oct.Data(j,8)=M(6,j);
+                   tb_oct.Data(j,9)=M(7,j);
+               end
+           end
+          
+         end
+ 
      function popup_Callback(source,~)
         str = source.String;
         val = source.Value;
@@ -585,11 +574,12 @@ a_ter=0;
        
         
      end
-        
-        
     end
-
 end
+
+
+
+
 
 
 
