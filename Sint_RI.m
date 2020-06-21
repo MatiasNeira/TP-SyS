@@ -1,4 +1,4 @@
-function y = Sint_RI(T,Fs,band)
+function y = Sint_RI(T,band)
 % y = Sint_RI :: Funcion con argumentos de entrada
 % La funcion sintetiza la respuesta al impulso teniendo en cuenta las
 % frecuencias centrales normalizadas segun la banda.
@@ -8,10 +8,11 @@ function y = Sint_RI(T,Fs,band)
 % 
     
     
-    n = 1/Fs;
+    n = 1/44100;
     t = (0:n:T);
     Y = 0;
     f=0;
+    T60 = zeros(18);
     if band == 'oct'
         f = [125 250 500 1000 2000 4000 8000 ];
         T60 = [1.07 1.34 1.39 1.22 1.17 1.08 0.76];
@@ -24,22 +25,22 @@ function y = Sint_RI(T,Fs,band)
     
     cant = length(f);
     y = cell(cant,1);
-    pi_i = (-log(10^-3))./(T60); 
+   
     
   for k= 1:length(f)                                          
         pik(k) = (-log(10^-3))./(T60(k)); 
         y{k} = flip((exp(pik(k)*t)).*cos(2*pi*f(k)*t)); %Genero un banco de IRs por frec. centrales           
        
-    end
+  end
     
 
-
-    for i = 1:length(f)
+   Sumcell = 0;
+    for i = 1:(length(f)-1)
  
             Sumcell = cumsum(y{i});
-            Ajustecero = Sumcell - Sumcell(length(t));           
-            SintIR = Ajustecero./abs(max(Ajustecero));
-                    
+                  
     end
-    
+           
+           SintIR = Sumcell./abs(max(Sumcell));    
+            
 end
