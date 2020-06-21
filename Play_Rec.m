@@ -16,7 +16,7 @@ function GR = Play_Rec()
     
 end
 
-function Sine = SS(T,F0,Ff)
+function SS(T,F0,Ff)
 
      Xt = SineSweep(T,F0,Ff);
         
@@ -38,7 +38,7 @@ function Sine = SS(T,F0,Ff)
         sound(a,Fs) %Reproduce el archivo de audio de la grabacion (a)
 end
 
-function Inv = IF(T,F0,Ff)
+function IF(T,F0,Ff)
    
     Xt = InverseFilter(T,F0,Ff);
         
@@ -63,7 +63,7 @@ function Inv = IF(T,F0,Ff)
 
 end
 
-function Ruido = RR(T)
+function RR(T)
 
     Xt = RuidoRosa(T);
         
