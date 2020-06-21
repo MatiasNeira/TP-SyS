@@ -194,8 +194,10 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
             g = Sint_RI(T,'oct');
            if a==1 
            plot(g{oct});
+           RI=g{oct};
            elseif a==2
            plot(g{ter});
+           RI=g{ter};
            end
 
       end
