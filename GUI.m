@@ -24,7 +24,9 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
     Procesamiento = uicontrol('Style', 'pushbutton',...
         'String','Procesamiento','Position',[175 30 150 50],...
         'Callback',{@procesamiento_Callback});
-    
+    Grabar = uicontrol('Style', 'pushbutton',...
+        'String','Grabar RI','Position',[175 200 150 50],...
+        'Callback',{@grabar_Callback});
      f.Units = 'normalized';
     text_1_1.Units = 'normalized';
     text_1_2.Units = 'normalized';
@@ -38,6 +40,70 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
     f.NumberTitle = 'off';
     f.Visible = 'on';
 
+    
+    %%
+    function grabar_Callback(source,eventdata)
+       j = figure('Visible','off','Position',[1000 1000 200 150]);
+       
+       
+       text_4_1 = uicontrol(j,'Style','text',...                 
+        'String','¿Que desea grabar?', ...
+        'FontSize',(8),	...                 
+        'Position',[50 100 100 30]);
+    hpopup_4_1 = uicontrol('Style', 'popupmenu',...
+        'String',{'Grabar SS','Grabar FI','Grabar RI'},'Position',[50 75 100 25],...
+        'Callback',{@popup41_Callback});
+    
+    
+    grab = uicontrol('Style', 'pushbutton',...
+        'String','Grabar RI','Position',[50 20 100 50],...
+        'Callback',{@grab_Callback});
+    
+    
+        j.Units = 'normalized';
+    text_1_1.Units = 'normalized';
+    text_1_2.Units = 'normalized';
+    text3.Units = 'normalized';
+    
+    ha.Units = 'normalized';
+    
+      j.Name = 'Grabar';
+    movegui(j,'center')
+    j.MenuBar = 'none';
+    j.NumberTitle = 'off';
+    j.Visible = 'on';
+    GR=0;
+    gr=0;
+    
+    function popup41_Callback(source,eventdata)
+        str = source.String;
+        val = source.Value;
+        switch str{val}
+           case 'Grabar SS'
+               gr=1;
+               
+           case 'Grabar FI'
+               gr=2;
+               
+           case 'Grabar RI'
+               gr=3;
+               
+        end
+    end
+    function grab_Callback(source,eventdata)
+        GR = Play_Rec()
+        if gr==1
+            
+            RI=GR.SineSweep;
+        elseif gr==2
+          
+            RI=GR.InverseFilter;
+        elseif gr==3
+           
+            RI=GR.RuidoRosa;
+        end
+    end
+    end
  %%
     function Sint_RI_Callback(source,eventdata)
         g = figure('Visible','off','Position',[1000 1000 250 500]);
