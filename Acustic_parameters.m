@@ -30,7 +30,7 @@ function [EDT,T10,T20,T30,T60,C80,D50] = Acustic_parameters(Soft_signal,original
 %% Encuentro el maximo valor que toma la funcion en el dominio [maxValue_X]
     
     maxValue_Y = max(Soft_signal);
-        for i = 1:length(Soft_signal)
+        for i = 1:1:length(Soft_signal)
             if Soft_signal(i) == maxValue_Y
                 break
             end
@@ -40,18 +40,19 @@ function [EDT,T10,T20,T30,T60,C80,D50] = Acustic_parameters(Soft_signal,original
 
 %% Valor del dominio de la señal despues de una decaida de 5dB desde su pico maximo [X_5dBDecay]
 
-    Y_5dBDecay = max(Soft_signal)-5;
+    Y_5dBDecay = max(Soft_signal)-5.1;
         for i = 1:length(Soft_signal)
-            if round(Soft_signal(i)) == Y_5dBDecay
+            if round(Soft_signal(i),1) == Y_5dBDecay
                 break
             end
         end
     X_5dBDecay = i; % i-ésima muestra
     
 %% Cálculo del EDT
-    Y_10dBDecay = max(Soft_signal)-10;
+
+    Y_10dBDecay = max(Soft_signal)-10.1;
         for i = 1:length(Soft_signal)
-            if round(Soft_signal(i)) == Y_10dBDecay
+            if round(Soft_signal(i),1) == Y_10dBDecay
                 break
             end
         end
@@ -64,9 +65,9 @@ function [EDT,T10,T20,T30,T60,C80,D50] = Acustic_parameters(Soft_signal,original
     EDT = 6*(Tf_EDT - T0_EDT);
 
 %% Calculo del T10
-    Y_15dBDecay = max(Soft_signal)-15;
+    Y_15dBDecay = max(Soft_signal)-15.1;
         for i = 1:length(Soft_signal)
-            if round(Soft_signal(i)) == Y_15dBDecay
+            if round(Soft_signal(i),1) == Y_15dBDecay
                 break
             end
         end
@@ -79,9 +80,9 @@ function [EDT,T10,T20,T30,T60,C80,D50] = Acustic_parameters(Soft_signal,original
     T10 = 6*(Tf_T10 - T0_T10);
     
 %% Calculo del T20  
-    Y_25dBDecay = max(Soft_signal)-25;
+    Y_25dBDecay = max(Soft_signal)-25.1;
         for i = 1:length(Soft_signal)
-            if round(Soft_signal(i)) == Y_25dBDecay
+            if round(Soft_signal(i),1) == Y_25dBDecay
                 break
             end
         end
@@ -93,9 +94,9 @@ function [EDT,T10,T20,T30,T60,C80,D50] = Acustic_parameters(Soft_signal,original
     
     T20 = 3*(Tf_T20 - T0_T20);
 %% Calculo del T30
-    Y_35dBDecay = max(Soft_signal)-35;
+    Y_35dBDecay = max(Soft_signal)-35.1;
         for i = 1:length(Soft_signal)
-            if round(Soft_signal(i)) == Y_35dBDecay
+            if round(Soft_signal(i),1) == Y_35dBDecay
                 break
             end
         end
@@ -128,5 +129,6 @@ function [EDT,T10,T20,T30,T60,C80,D50] = Acustic_parameters(Soft_signal,original
     
     C80 = 10*log10(trapz(pt(Max_Signal:Max_Signal + Ms80))/trapz(pt(Max_Signal + Ms80:end)));    
     D50 = 100*(sum(pt(Max_Signal:Max_Signal + Ms50))/sum(pt(Max_Signal:end)));
+
 
 end
