@@ -1,12 +1,23 @@
 function GUI
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+%                     ...
+
+% GUI ::  Función sin elementos de entrada, para ponerla en ejecucion se
+% podrá llamar desde la Command Window o Correrla (Run).
+%
+% Interfaz grafica que articula todas las funciones trabajadas para obtener los
+% parametros acusticos de un recinto. 
+%
+% Una vez ejecutada la función, seleccionar el pushbutton "Manual" para
+% conocer las instrucciones y pasos a seguir.
+
+%                    ...
+
 f = figure('Visible','off','Position',[1000 1000 500 250]);
 
     pan_1 = uipanel(f,'Title','',... 
         'Position',[.05 .05 .9 .9]);
     text_1_1 = uicontrol(f,'Style','text',...                 
-        'String','Menu Principal', ...
+        'String','Menú Principal', ...
         'FontSize',(12),	...                 
         'Position',[100 190 300 50]);  
     text_1_2 = uicontrol(f,'Style','text',...                 
@@ -24,9 +35,15 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
     Procesamiento = uicontrol('Style', 'pushbutton',...
         'String','Procesamiento','Position',[175 30 150 50],...
         'Callback',{@procesamiento_Callback});
+    
     Grabar = uicontrol('Style', 'pushbutton',...
-        'String','Grabar RI','Position',[175 200 150 50],...
+        'String','Play - Rec','Position',[175 200 150 50],...
         'Callback',{@grabar_Callback});
+    
+    Guia = uicontrol('Style', 'pushbutton',...
+        'String','Manual','Position',[420 25 50 25],...
+        'Callback',{@Guia_Callback});
+    
      f.Units = 'normalized';
     text_1_1.Units = 'normalized';
     text_1_2.Units = 'normalized';
@@ -34,7 +51,7 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
     
     ha.Units = 'normalized';
     RI = 0;
-      f.Name = 'Menu Principal';
+      f.Name = 'Menú Principal';
     movegui(f,'center')
     f.MenuBar = 'none';
     f.NumberTitle = 'off';
@@ -42,12 +59,58 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
 
     
     %%
+    function Guia_Callback(source,eventdata)
+        
+            hGui = figure('Visible','off','Position',[1000 1000 500 500]);
+        
+       
+    p2Gui = uipanel(hGui,'Title','Manual de usuario',... 
+        'Position',[.05 .05 .9 .95],...
+        'TitlePosition','centertop');
+    
+    tGui = uicontrol(hGui,'Style','text',...                 
+        'String','  Respuesta al Impulso (RI)', ...                
+        'Position',[55 450 400 50]);
+    
+     tGui1 = uicontrol(hGui,'Style','text',...                 
+        'String','+ Como primer paso, usted, debe cargar una respuesta al impulso la cual una vez cargada, quedará registrada en el programa para asi luego procesarla. Para ello tiene la posibilidad de sintetizarlo a traves del pushbutton "Sintetizar RI", de otra manera existe la forma de cargar archivos de audio .wav a traves de "Generar o Importar RI", elgiendo si directamente carga la RI o realiza la convolucion entre dos audios para obtenerla. ', ...                
+        'Position',[45 390 400 85]);
+     tGui2 = uicontrol(hGui,'Style','text',...                 
+        'String','Play - Rec ', ...                
+        'Position',[55 280 400 85]);
+    tGui3 = uicontrol(hGui,'Style','text',...                 
+        'String','+ En el caso que exista la posibilidad de realizar la grabacion del recinto a medir, el programa cuenta con la posibilidad de reproducir un Sine-Sweep (Barrido Senoidal) y grabar su respuesta, guardando ambas tomas en archivos .wav para luego utilizarlas en el pushbutton "Generar o Importar RI" mencionado anteriormente. Tambien cuenta con la posibilidad de realizar la misma acción con Ruido Rosa para realizar ciertas mediciones o un Filtro inverso correspondiente al Sine-Sweep mencionado con anterioridad, para poder realizar la convolucion. ', ...                
+        'Position',[45 230 400 110]);
+     tGui4 = uicontrol(hGui,'Style','text',...                 
+        'String','Procesamiento ', ...                
+        'Position',[55 115 400 85]);
+    tGui5 = uicontrol(hGui,'Style','text',...                 
+        'String','+ Una vez cargada la respuesta al impulso, se debe proceder a clickear "Procesamiento", donde encontrará una serie de graficos con las distintas etapas de proceso de la RI y una tabla, la cual debe ser actualizada, que le indicara todos los parametros acusticos del recinto a estudiar. Para poder visualizar los graficos, debe seleccionar que tipo de filtro desea aplicarle a la señal y su frecuencia central (Fc), una vez hecho esto proceda a seleccionar el pushbutton "Procesar" donde se le actualizaran los graficos correspondientes a los datos seleccionados. ', ...                
+        'Position',[45 55 400 120]);
+  
+        hGui.Units = 'normalized';
+    text1.Units = 'normalized';
+    text2.Units = 'normalized';
+    text3.Units = 'normalized';
+    htext.Units = 'normalized';
+    hpopup.Units = 'normalized';    
+    ha.Units = 'normalized';
+    
+      hGui.Name = 'Manual';
+    movegui(hGui,'center')
+    hGui.MenuBar = 'none';
+    hGui.NumberTitle = 'off';
+    hGui.Visible = 'on'; 
+    
+    end
+    
+    %%
     function grabar_Callback(source,eventdata)
        j = figure('Visible','off','Position',[1000 1000 200 150]);
        
        
        text_4_1 = uicontrol(j,'Style','text',...                 
-        'String','�Que desea grabar?', ...
+        'String','¿Que desea grabar?', ...
         'FontSize',(8),	...                 
         'Position',[50 160 100 30]);
     hpopup_4_1 = uicontrol('Style', 'popupmenu',...
@@ -180,7 +243,7 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
         'FontSize',(8),	...                 
         'Position',[25 325 100 30]);
     hpopup_1_1 = uicontrol('Style', 'popupmenu',...
-        'String',{'Filtro de Octava','Filtro de Tercio de Octava'},'Position',[125 330 100 25],...
+        'String',{'','Filtro de Octava','Filtro de Tercio de Octava'},'Position',[125 330 100 25],...
         'Callback',{@popup_Callback});
     sint = uicontrol('Style', 'pushbutton',...
         'String','Sintetizar','Position',[75 300 100 40],...
@@ -340,7 +403,7 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
         'String','Cargar','Position',[75 425 100 40],...
         'Callback',{@cargar_Callback});
     hpopup = uicontrol('Style', 'popupmenu',...
-        'String',{'Cargar RI (.wav)','Generar RI (SS y FI existentes)','Generar SS, FI y RI'},'Position',[75 360 100 25],...
+        'String',{'','Cargar RI (.wav)','Generar RI (SS y FI existentes)','Generar SS, FI y RI'},'Position',[75 360 100 25],...
         'Callback',{@popup_Callback});
     
     
@@ -436,7 +499,7 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
           
          plot(ax1,RI);
         end
-    end
+   end
 %%
     function procesamiento_Callback(source,eventdata)
    
@@ -457,18 +520,18 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
        text_4_4 = uicontrol(i,'Style','text','String','Respuesta al Impulso','FontSize',(7),'Position',[550 525 100 10]);
        ax3_1 = axes('Parent',i,'Position',[.25 .80 .7 .15]);
        
-       text_4_5 = uicontrol(i,'Style','text','String','Respuesta al Impulso con filtro con octava/tercio de octava','FontSize',(7),'Position',[400 390 400 10]);
+       text_4_5 = uicontrol(i,'Style','text','String','Respuesta al Impulso filtrada por octava/tercio de octava','FontSize',(7),'Position',[400 390 400 10]);
        ax3_2 = axes('Parent',i,'Position',[.25 .55 .7 .15]);
        
        text_4_6 = uicontrol(i,'Style','text','String','Recorte de la respuesta al impulso en zona de interes','FontSize',(7),'Position',[400 250 400 10]);
        ax3_3 = axes('Parent',i,'Position',[.25 .30 .7 .15]);
        
-       text_4_7 = uicontrol(i,'Style','text','String','Suavizados','FontSize',(7),'Position',[550 115 70 10]);
+       text_4_7 = uicontrol(i,'Style','text','String','Suavizado de la señal y decaimiento de Schroeder','FontSize',(7),'Position',[400 115 400 10]);
        ax3_4 = axes('Parent',i,'Position',[.25 .05 .7 .15]);
         
- 
+%[550 115 70 10]
         hpopup = uicontrol('Style', 'popupmenu',...
-        'String',{'Filtro de Octava','Filtro de Tercio de Octava'},'Position',[75 300 100 25],...
+        'String',{'','Filtro de Octava','Filtro de Tercio de Octava'},'Position',[75 300 100 25],...
         'Callback',{@popup_Callback});
     
         hpopup1 = uicontrol('Visible','off','Style', 'popupmenu',...
@@ -503,25 +566,29 @@ f = figure('Visible','off','Position',[1000 1000 500 250]);
     
    
      
-type_filter_oct = cell(7,1);
-X_max = zeros(7,1);
-second_part_oct = cell(7,1);
-cut_signal_oct = cell(7,1);
-H_oct = cell(7,1);
-Deci_B_oct= cell(7,1);
-schroeder_oct = cell(7,1);
-fc_oct = [125,500,1000,2000,4000,8000];
-M=zeros(9,6);
-for i=1:6
-filter = filt();
-type_filter_oct{i} = filter.Octava(RI,int2str(fc_oct(i))); % Filtrado de la se�al
-X_max(i) = find(type_filter_oct{i}==max(type_filter_oct{i})); %Busco el maximo de la se�al (RI)
-second_part_oct{i} = [X_max(i):X_max(i)+8.3*10^4]; %selecciono la seccion desde el maximo hasta el maximo + cierta distancia aprox a ojo.
-cut_signal_oct{i} = type_filter_oct{i}(second_part_oct{i}); %cut_signal es la parte de la se�al mencionada anteriormente (el decaimiento de la se�al)
-H_oct{i} = Hilbert(cut_signal_oct{i}); 
-Deci_B_oct{i} = ConvLog (H_oct{i});
-schroeder_oct{i} = IntSch(cut_signal_oct{i},Deci_B_oct{i});
-[M(1,i),M(2,i),M(3,i),M(4,i),M(5,i),M(6,i),M(7,i)] = Acustic_parameters(schroeder_oct{i},RI,'T10');
+    type_filter_oct = cell(7,1);
+    X_max = zeros(7,1);
+    second_part_oct = cell(7,1);
+    cut_signal_oct = cell(7,1);
+    H_oct = cell(7,1);
+    Deci_B_oct= cell(7,1);
+    schroeder_oct = cell(7,1);
+    fc_oct = [125,500,1000,2000,4000,8000];
+    M=zeros(9,6);
+    
+for i = 1:6
+    filter = filt();
+    type_filter_oct{i} = filter.Octava(RI,int2str(fc_oct(i))); % Filtrado de la señal
+    
+    X_max(i) = find(type_filter_oct{i}==max(type_filter_oct{i})); %Busco el maximo de la señal (RI)
+    second_part_oct{i} = [X_max(i):X_max(i)+8.3*10^4]; %selecciono la seccion desde el maximo hasta el maximo + cierta distancia aprox a ojo.
+    cut_signal_oct{i} = type_filter_oct{i}(second_part_oct{i}); %cut_signal es la parte de la señal mencionada anteriormente (el decaimiento de la señal)
+    
+    H_oct{i} = Hilbert(cut_signal_oct{i}); 
+    Deci_B_oct{i} = ConvLog (H_oct{i});
+    schroeder_oct{i} = IntSch(cut_signal_oct{i},Deci_B_oct{i});
+    
+    [M(1,i),M(2,i),M(3,i),M(4,i),M(5,i),M(6,i),M(7,i)] = Acustic_parameters(schroeder_oct{i},RI,'T10');
 end
 
 
@@ -534,12 +601,13 @@ Deci_B_ter = cell(18,1);
 schroeder_ter = cell(18,1);
 fc_ter = [125,160,200,315,400,500,630,800,1000,1250,1600,2250,3150,4000,5000,6000,8000];
 M_ter=zeros(9,17);
+
 for i=1:17
 filter = filt();
-type_filter_ter{i} = filter.Tercio(RI,int2str(fc_ter(i))); % Filtrado de la se�al
-X_max(i) = find(type_filter_ter{i}==max(type_filter_ter{i})); %Busco el maximo de la se�al (RI)
+type_filter_ter{i} = filter.Tercio(RI,int2str(fc_ter(i))); % Filtrado de la señal
+X_max(i) = find(type_filter_ter{i}==max(type_filter_ter{i})); %Busco el maximo de la señal (RI)
 second_part_ter{i} = [X_max(i):X_max(i)+8.3*10^4]; %selecciono la seccion desde el maximo hasta el maximo + cierta distancia aprox a ojo.
-cut_signal_ter{i} = type_filter_ter{i}(second_part_ter{i}); %cut_signal es la parte de la se�al mencionada anteriormente (el decaimiento de la se�al)
+cut_signal_ter{i} = type_filter_ter{i}(second_part_ter{i}); %cut_signal es la parte de la señal mencionada anteriormente (el decaimiento de la señal)
 H_ter{i} = Hilbert(cut_signal_ter{i}); 
 Deci_B_ter{i} = ConvLog (H_ter{i});
 schroeder_ter{i} = IntSch(cut_signal_ter{i},Deci_B_ter{i});
